@@ -10,15 +10,19 @@ import android.view.animation.Animation;
 import android.widget.RelativeLayout;
 
 import com.liteng.dev.base.AuthoriseActivity;
+import com.liteng.dev.home.MainActivity;
+import com.liteng.dev.utils.SPUtils;
 
-public class WelcomActivity extends AppCompatActivity {
+public class WelcomeActivity extends AppCompatActivity {
 
+
+    private final String FIRST_ENTER = "first_enter";
     private RelativeLayout welcome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_welcom);
+        setContentView(R.layout.activity_welcome);
         welcome = (RelativeLayout) this.findViewById(R.id.welcome);
 
 
@@ -33,13 +37,21 @@ public class WelcomActivity extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(WelcomActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(WelcomeActivity.this);
                 builder.setTitle("注意");
                 builder.setMessage("本应用采用开源中国(OS China)的开放接口,所以请先使用开源中国账号登陆");
                 builder.setPositiveButton("好的", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        startActivity(new Intent(WelcomActivity.this,AuthoriseActivity.class));
+
+                        if(!SPUtils.getSp().getBoolean(FIRST_ENTER)){
+                            startActivity(new Intent(WelcomeActivity.this,AuthoriseActivity.class));
+                        }else{
+                            startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
+                        }
+
+                        SPUtils.getSp().saveTrue(FIRST_ENTER);
+
                         finish();
                     }
                 });

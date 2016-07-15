@@ -2,7 +2,9 @@ package com.liteng.dev.tweet;
 
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.ListView;
 
 import com.android.volley.VolleyError;
@@ -15,6 +17,7 @@ import com.liteng.dev.net.URLs;
 import com.liteng.dev.tweet.adapter.TweetListAdapter;
 import com.liteng.dev.tweet.entry.Tweet;
 import com.liteng.dev.utils.ComUtils;
+import com.liteng.dev.widget.LoadMoreListView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -29,7 +32,7 @@ public class TweetListFragment extends BaseFragment {
 
     private String mType;
     private int pageNo;
-    private ListView mLvTweetList;
+    private LoadMoreListView mLvTweetList;
     private List<Tweet> mTweets = null;
     private TweetListAdapter mTweetListAdapter;
 
@@ -55,12 +58,24 @@ public class TweetListFragment extends BaseFragment {
 
     @Override
     protected void initViews(View rootView) {
-        mLvTweetList = (ListView) rootView.findViewById(R.id.lvTweetList);
+        mLvTweetList = (LoadMoreListView) rootView.findViewById(R.id.lvTweetList);
         mTweets = new ArrayList<>();
         mTweetListAdapter = new TweetListAdapter(mTweets,getActivity());
         mLvTweetList.setAdapter(mTweetListAdapter);
 
+
+        showLoading();
         getWTweetList();
+
+
+        mLvTweetList.setOnLoadMoreListener(new LoadMoreListView.OnLoadMoreListener() {
+            @Override
+            public void onLoadMore() {
+                getWTweetList();
+            }
+        });
+
+
     }
 
     @Override
@@ -70,6 +85,7 @@ public class TweetListFragment extends BaseFragment {
 
 
     private void getWTweetList(){
+
         /**
          *
          必选	类型及范围	说明	默认值
@@ -86,6 +102,10 @@ public class TweetListFragment extends BaseFragment {
         SimpleRequst requst  = new SimpleRequst(URLs.TWEET_LIST_URL, parames, new SimpleRequst.ResponseListener() {
             @Override
             public void onSuccess(JSONObject jObj) {
+                dismissLoading();
+
+                Log.e("--------------",""+jObj.toString());
+
                 if (jObj == null) {
                     ComUtils.showToastLong(R.string.net_error_response);
                     return;
@@ -100,11 +120,16 @@ public class TweetListFragment extends BaseFragment {
                 }
                 mTweets.addAll(tweets);
                 mTweetListAdapter.notifyDataSetChanged();
+
+                if(mLvTweetList.isLoading()){
+                    mLvTweetList.loadComplete();
+                }
             }
 
             @Override
             public void onFailed(VolleyError error) {
-
+                ComUtils.showToastLong(R.string.net_error_response);
+                dismissLoading();
             }
         });
         App.mQueue.add(requst);

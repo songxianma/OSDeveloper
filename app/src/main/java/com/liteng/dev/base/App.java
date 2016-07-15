@@ -11,6 +11,8 @@ import com.android.volley.toolbox.Volley;
  */
 public class App extends Application {
 
+    public static final boolean DEBUG = true;
+
     public static Context mContext;
 
 

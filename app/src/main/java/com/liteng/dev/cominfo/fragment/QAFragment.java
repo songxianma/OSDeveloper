@@ -1,4 +1,4 @@
-package com.liteng.dev.cominfo;
+package com.liteng.dev.cominfo.fragment;
 
 import android.view.View;
 

@@ -1,10 +1,6 @@
-package com.liteng.dev.cominfo;
+package com.liteng.dev.cominfo.fragment;
 
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.liteng.dev.R;
 import com.liteng.dev.base.BaseFragment;

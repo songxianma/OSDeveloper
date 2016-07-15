@@ -27,7 +27,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
 
         AlphaAnimation alphaAnimation = new AlphaAnimation(0.3f,0.9f);
-        alphaAnimation.setDuration(3000);
+        alphaAnimation.setDuration(2000);
         welcome.setAnimation(alphaAnimation);
         alphaAnimation.setAnimationListener(new Animation.AnimationListener() {
             @Override
@@ -37,31 +37,37 @@ public class WelcomeActivity extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(WelcomeActivity.this);
-                builder.setTitle("注意");
-                builder.setMessage("本应用采用开源中国(OS China)的开放接口,所以请先使用开源中国账号登陆");
-                builder.setPositiveButton("好的", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                if (!SPUtils.getSp().getBoolean(FIRST_ENTER)) {
 
-                        if(!SPUtils.getSp().getBoolean(FIRST_ENTER)){
-                            startActivity(new Intent(WelcomeActivity.this,AuthoriseActivity.class));
-                        }else{
-                            startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
+                    AlertDialog.Builder builder = new AlertDialog.Builder(WelcomeActivity.this);
+                    builder.setTitle("注意");
+                    builder.setMessage("本应用采用开源中国(OS China)的开放接口,所以请先使用开源中国账号登陆");
+                    builder.setPositiveButton("好的", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            if (!SPUtils.getSp().getBoolean(FIRST_ENTER)) {
+                                startActivity(new Intent(WelcomeActivity.this, AuthoriseActivity.class));
+                            } else {
+                                startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
+                            }
+
+                            SPUtils.getSp().saveTrue(FIRST_ENTER);
+
+                            finish();
                         }
-
-                        SPUtils.getSp().saveTrue(FIRST_ENTER);
-
-                        finish();
-                    }
-                });
-                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        finish();
-                    }
-                });
-                builder.create().show();
+                    });
+                    builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    });
+                    builder.create().show();
+                }else{
+                    startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
+                    finish();
+                }
             }
 
             @Override

@@ -16,6 +16,10 @@ public class URLs {
 
     public static final String NEWS_LIST_URL = BASE_ROOT_URL +"action/openapi/news_list";
 
+    public static final String NEWS_DETAIL_URL = BASE_ROOT_URL +"action/openapi/news_detail";
+
+    public static final String TWEET_LIST_URL = BASE_ROOT_URL +"action/openapi/tweet_list";
+
 
 
 

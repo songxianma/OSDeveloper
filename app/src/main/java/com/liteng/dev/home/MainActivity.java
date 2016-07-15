@@ -1,13 +1,12 @@
 package com.liteng.dev.home;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentTabHost;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TabHost;
@@ -16,10 +15,11 @@ import android.widget.Toast;
 
 import com.liteng.dev.R;
 import com.liteng.dev.base.BaseActivity;
-import com.liteng.dev.cominfo.CommonInfoFragment;
+import com.liteng.dev.cominfo.fragment.CommonInfoFragment;
 import com.liteng.dev.explore.ExploreFragment;
 import com.liteng.dev.me.MeFragment;
 import com.liteng.dev.tweet.TweetFragment;
+import com.liteng.dev.utils.ComUtils;
 import com.liteng.dev.widget.MyTabHost;
 
 
@@ -59,6 +59,19 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         if(actionBar != null){
             actionBar.setDisplayShowTitleEnabled(true);
         }
+
+        mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.menu_search:
+                        ComUtils.showToastLong("shousuo");
+                        break;
+                }
+                return false;
+            }
+        });
+
     }
 
     private void initTabHost() {

@@ -1,61 +1,72 @@
 package com.liteng.dev.tweet;
 
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.view.ViewGroup;
 
+import com.gxz.PagerSlidingTabStrip;
 import com.liteng.dev.R;
+import com.liteng.dev.base.BaseFragment;
+import com.liteng.dev.tweet.entry.Tweet;
 
 
-public class TweetFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+public class TweetFragment extends BaseFragment {
 
 
-    public TweetFragment() {
-        // Required empty public constructor
-    }
+    private String[] mTiltes = {"最新动弹", "热门动弹", "我的动弹"};
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment CommonInfoFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static TweetFragment newInstance(String param1, String param2) {
-        TweetFragment fragment = new TweetFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    private PagerSlidingTabStrip mTabStrip;
+    private ViewPager mVpTweetPagers;
+
+    @Override
+    protected void initViews(View rootView) {
+        mTabStrip = (PagerSlidingTabStrip) rootView.findViewById(R.id.tabTweetStrip);
+        mVpTweetPagers = (ViewPager) rootView.findViewById(R.id.vpTweet);
+        TweetListAdapter adapter = new TweetListAdapter(getChildFragmentManager());
+        mVpTweetPagers.setAdapter(adapter);
+        mTabStrip.setViewPager(mVpTweetPagers);
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    public int getLayoutRes() {
+        return R.layout.fragment_tweet;
+    }
+
+    private class TweetListAdapter extends FragmentPagerAdapter {
+
+        public TweetListAdapter(FragmentManager fm) {
+            super(fm);
         }
-    }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tweet, container, false);
+        @Override
+        public Fragment getItem(int position) {
+            int type = 0;
+            switch (position) {
+                case 0:
+                    type = Tweet.TYPE_RENCENT;
+                    break;
+                case 1:
+                    type = Tweet.TYPE_HOT;
+                    break;
+                case 2:
+                    type = Tweet.TYPE_MINE;
+                    break;
+            }
+            Fragment fragment = TweetListFragment.newInstance(type+"");
+            return fragment;
+        }
+
+        @Override
+        public int getCount() {
+            return mTiltes.length;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mTiltes[position];
+        }
     }
 
 

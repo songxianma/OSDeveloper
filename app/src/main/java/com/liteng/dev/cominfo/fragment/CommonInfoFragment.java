@@ -1,4 +1,4 @@
-package com.liteng.dev.cominfo;
+package com.liteng.dev.cominfo.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,7 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
-import com.astuetz.PagerSlidingTabStrip;
+import com.gxz.PagerSlidingTabStrip;
 import com.liteng.dev.R;
 import com.liteng.dev.base.BaseFragment;
 

@@ -21,7 +21,7 @@ import java.util.Map;
 public class SimpleRequst extends Request<JSONObject> {
 
     //超时时间
-    private final int TIME_OUT_MS = 15000;
+    private final int TIME_OUT_MS = 5000;
     //重试次数
     private final int RETRY_TIME = 0;
 

@@ -1,13 +1,21 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context="com.liteng.dev.cominfo.InfosFragment">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".cominfo.fragment.InfosFragment">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvNewsList"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/refreshNewsLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvNewsList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <include layout="@layout/include_loading"/>
 
 
-</LinearLayout>
+</RelativeLayout>

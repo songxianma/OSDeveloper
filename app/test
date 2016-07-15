@@ -1,0 +1,199 @@
+{
+    "newslist": [
+        {
+            "author": "oschina",
+            "id": 75170,
+            "title": " 开源中国翻译频道贡献 2016 (5-6月) 奖励名单",
+            "type": 4,
+            "authorid": 1,
+            "pubDate": "2016-07-13 11:38:28",
+            "commentCount": 0
+        },
+        {
+            "author": "我的上铺叫路遥",
+            "id": 75169,
+            "title": "Yasea v1.1 发布，安卓直播推流客户端",
+            "type": 4,
+            "authorid": 1444806,
+            "pubDate": "2016-07-13 11:23:10",
+            "commentCount": 0
+        },
+        {
+            "author": "pissang",
+            "id": 75168,
+            "title": "ECharts 3.2.2 发布，新增多 Y 轴的支持",
+            "type": 4,
+            "authorid": 1248158,
+            "pubDate": "2016-07-13 10:38:22",
+            "commentCount": 8
+        },
+        {
+            "author": "JFinal",
+            "id": 75167,
+            "title": "JFinal Weixin 1.8 发布，微信极速 SDK",
+            "type": 4,
+            "authorid": 201137,
+            "pubDate": "2016-07-13 10:13:22",
+            "commentCount": 37
+        },
+        {
+            "author": "oschina",
+            "id": 75166,
+            "title": "济南、青岛 OSC 源创会最后几天报名，错过等一年",
+            "type": 0,
+            "authorid": 1,
+            "pubDate": "2016-07-13 08:25:04",
+            "url": "http://www.oschina.net/news/74747/july-event-jinan-qingdao",
+            "object": 0,
+            "commentCount": 0
+        },
+        {
+            "author": "oschina",
+            "id": 75165,
+            "title": "Rocket v1.10.1 发布，CoreOS 容器引擎",
+            "type": 4,
+            "authorid": 1,
+            "pubDate": "2016-07-13 08:19:25",
+            "commentCount": 1
+        },
+        {
+            "author": "oschina",
+            "id": 75164,
+            "title": "OSC 第 119 期高手问答 -- 白话大数据与机器学习",
+            "type": 2,
+            "authorid": 1,
+            "pubDate": "2016-07-13 08:17:27",
+            "commentCount": 21,
+            "object": 2187776
+        },
+        {
+            "author": "oschina",
+            "id": 75163,
+            "title": "Vert.x 3.3.2 发布，基于 JVM 的 Node 替代者",
+            "type": 4,
+            "authorid": 1,
+            "pubDate": "2016-07-13 08:16:19",
+            "commentCount": 3
+        },
+        {
+            "author": "oschina",
+            "id": 75162,
+            "title": "协作翻译 | 我为何从 Python 转向 Erlang",
+            "type": 7,
+            "authorid": 1,
+            "pubDate": "2016-07-13 08:14:11",
+            "object": 10003472,
+            "commentCount": 0
+        },
+        {
+            "author": "oschina",
+            "id": 75161,
+            "title": "Git 项目推荐 | 批量转换 DOC 文件到 PDF",
+            "type": 0,
+            "authorid": 1,
+            "pubDate": "2016-07-13 08:12:48",
+            "url": "http://git.oschina.net/fwy1998/VBScript_DOC2PDF",
+            "object": 0,
+            "commentCount": 0
+        },
+        {
+            "author": "oschina",
+            "id": 75160,
+            "title": "IntelliJ-Rust —— Rust 语言的 IntelliJ 插件",
+            "type": 1,
+            "authorid": 1,
+            "pubDate": "2016-07-13 08:11:22",
+            "object": 42824,
+            "commentCount": 0
+        },
+        {
+            "author": "oschina",
+            "id": 75159,
+            "title": "Aspose.Note for Java 2.4.0 发布",
+            "type": 4,
+            "authorid": 1,
+            "pubDate": "2016-07-13 08:10:24",
+            "commentCount": 1
+        },
+        {
+            "author": "oschina",
+            "id": 75158,
+            "title": "OSChina 周三乱弹 —— 所有的酒，都不如你 ",
+            "type": 3,
+            "authorid": 1,
+            "pubDate": "2016-07-13 08:06:47",
+            "commentCount": 37,
+            "object": 710845
+        },
+        {
+            "author": "oschina",
+            "id": 75157,
+            "title": "PostgreSQL 9.6 beta 2 发布，数据库服务器",
+            "type": 4,
+            "authorid": 1,
+            "pubDate": "2016-07-13 08:06:09",
+            "commentCount": 3
+        },
+        {
+            "author": "oschina",
+            "id": 75156,
+            "title": "每日一博 | Web 安全趋势与核心防御机制",
+            "type": 3,
+            "authorid": 1,
+            "pubDate": "2016-07-13 08:05:58",
+            "commentCount": 2,
+            "object": 709328
+        },
+        {
+            "author": "oschina",
+            "id": 75155,
+            "title": "房子也开源 ？ 建造生态房屋",
+            "type": 4,
+            "authorid": 1,
+            "pubDate": "2016-07-13 08:03:35",
+            "commentCount": 24
+        },
+        {
+            "author": "oschina",
+            "id": 75154,
+            "title": "Spring Cloud Data Flow 1.0 GA 发布",
+            "type": 4,
+            "authorid": 1,
+            "pubDate": "2016-07-13 07:58:34",
+            "commentCount": 0
+        },
+        {
+            "author": "oschina",
+            "id": 75153,
+            "title": "Spring for Apache Kafka 1.0.2 发布",
+            "type": 4,
+            "authorid": 1,
+            "pubDate": "2016-07-13 07:53:49",
+            "commentCount": 2
+        },
+        {
+            "author": "oschina",
+            "id": 75152,
+            "title": "IPFire 2.19 Core 103 发布，Linux 防火墙",
+            "type": 4,
+            "authorid": 1,
+            "pubDate": "2016-07-13 07:47:50",
+            "commentCount": 0
+        },
+        {
+            "author": "oschina",
+            "id": 75151,
+            "title": "Docker Swarm 已死！Docker Swarm 万岁！",
+            "type": 4,
+            "authorid": 1,
+            "pubDate": "2016-07-13 07:47:39",
+            "commentCount": 7
+        }
+    ],
+    "notice": {
+        "referCount": 0,
+        "replyCount": 0,
+        "msgCount": 0,
+        "fansCount": 0
+    }
+}

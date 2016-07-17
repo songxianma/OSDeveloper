@@ -2,6 +2,7 @@ package com.liteng.dev.tweet;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
@@ -11,15 +12,19 @@ import com.android.volley.VolleyError;
 import com.liteng.dev.R;
 import com.liteng.dev.base.App;
 import com.liteng.dev.base.BaseFragment;
+import com.liteng.dev.db.DBHelper;
+import com.liteng.dev.db.DataCache;
 import com.liteng.dev.net.HttpUtils;
 import com.liteng.dev.net.SimpleRequst;
 import com.liteng.dev.net.URLs;
 import com.liteng.dev.tweet.adapter.TweetListAdapter;
 import com.liteng.dev.tweet.entry.Tweet;
 import com.liteng.dev.utils.ComUtils;
+import com.liteng.dev.utils.SPUtils;
 import com.liteng.dev.widget.LoadMoreListView;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -28,6 +33,8 @@ import java.util.Map;
 
 
 public class TweetListFragment extends BaseFragment {
+    private static  String mCacheKey = "TweetList";
+
     private static final String ARG_TYPE = "ARG_TYPE";
 
     private String mType;
@@ -44,6 +51,9 @@ public class TweetListFragment extends BaseFragment {
         Bundle args = new Bundle();
         args.putString(ARG_TYPE, arg);
         fragment.setArguments(args);
+
+        mCacheKey = SPUtils.getSp().getAccessToken() + arg;
+
         return fragment;
     }
 
@@ -67,14 +77,12 @@ public class TweetListFragment extends BaseFragment {
         showLoading();
         getWTweetList();
 
-
         mLvTweetList.setOnLoadMoreListener(new LoadMoreListView.OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
                 getWTweetList();
             }
         });
-
 
     }
 
@@ -103,36 +111,58 @@ public class TweetListFragment extends BaseFragment {
             @Override
             public void onSuccess(JSONObject jObj) {
                 dismissLoading();
-
-                Log.e("--------------",""+jObj.toString());
-
-                if (jObj == null) {
-                    ComUtils.showToastLong(R.string.net_error_response);
-                    return;
-                }
-                List<Tweet> tweets= new ArrayList<>();
-
-                JSONArray tweetArr = jObj.optJSONArray("tweetlist");
-                for (int i = 0; i < tweetArr.length(); i++) {
-                    JSONObject tweetObj = tweetArr.optJSONObject(i);
-                    Tweet tweet = new Tweet(tweetObj);
-                    tweets.add(tweet);
-                }
-                mTweets.addAll(tweets);
-                mTweetListAdapter.notifyDataSetChanged();
-
-                if(mLvTweetList.isLoading()){
-                    mLvTweetList.loadComplete();
-                }
+                saveDataCache(jObj);
+                bindViews(jObj);
             }
 
             @Override
             public void onFailed(VolleyError error) {
+                String cacheString = DBHelper.getDBHelper().getCache(mCacheKey).toString();
+                try {
+                    bindViews(new JSONObject(cacheString));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
                 ComUtils.showToastLong(R.string.net_error_response);
                 dismissLoading();
             }
         });
         App.mQueue.add(requst);
+    }
+
+    private void bindViews(JSONObject jObj) {
+        if (jObj == null) {
+            ComUtils.showToastLong(R.string.net_error_response);
+            String cacheString = DBHelper.getDBHelper().getCache(mCacheKey).toString();
+            try {
+                bindViews(new JSONObject(cacheString));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return;
+        }
+        List<Tweet> tweets= new ArrayList<>();
+
+        JSONArray tweetArr = jObj.optJSONArray("tweetlist");
+        for (int i = 0; i < tweetArr.length(); i++) {
+            JSONObject tweetObj = tweetArr.optJSONObject(i);
+            Tweet tweet = new Tweet(tweetObj);
+            tweets.add(tweet);
+        }
+        mTweets.addAll(tweets);
+        mTweetListAdapter.notifyDataSetChanged();
+
+        if(mLvTweetList.isLoading()){
+            mLvTweetList.loadComplete();
+        }
+    }
+
+    private void saveDataCache(JSONObject jObj) {
+        DataCache cache = new DataCache();
+        cache.setKey(mCacheKey);
+        cache.setContent(jObj.toString());
+        DBHelper.getDBHelper().saveCache(cache);
     }
 
 }
